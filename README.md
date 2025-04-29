@@ -73,8 +73,7 @@ open-brewery-pipeline/
 
 ```bash
 # Clone o repositório
-git clone https://github.com/seu-usuario/open-brewery-pipeline.git
-cd open-brewery-pipeline
+git clone https://github.com/brennodepaula/Data-Engineering-Breweries-Case.git
 
 # Suba a infraestrutura
 docker-compose up --build
