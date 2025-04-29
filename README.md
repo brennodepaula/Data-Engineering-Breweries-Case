@@ -4,7 +4,7 @@
 
 ## Contexto e Objetivo
 
-Este projeto tem como objetivo demonstrar a criação de uma pipeline de dados orquestrada com **Apache Airflow**, utilizando dados da [Open Brewery DB API](https://www.openbrewerydb.org/). O pipeline consome dados de cervejaria e os processa em três camadas distintas conforme a **Arquitetura Medallion**: Bronze (raw), Silver (curado e particionado) e Gold (agregado para análise).
+Este projeto tem como objetivo demonstrar a criação de uma pipeline de dados orquestrada com **Apache Airflow**, utilizando dados da [Open Brewery DB API](https://www.openbrewerydb.org/). O pipeline consome dados de cervejaria e os processa em três camadas distintas conforme a **Arquitetura Medallion**: Bronze (raw), Silver (curado e particionado, retirando aquelas cervejarias onde a informação de país e/ou estado não existia) e Gold (agregado para análise).
 
 O projeto simula um cenário real de ingestão, tratamento, particionamento e agregação de dados com foco em boas práticas de engenharia de dados.
 
@@ -44,6 +44,7 @@ O projeto simula um cenário real de ingestão, tratamento, particionamento e ag
 
 ## Estrutura do Projeto
 
+<pre>
 open-brewery-pipeline/
 │
 ├── dags/
@@ -57,7 +58,7 @@ open-brewery-pipeline/
 ├── docker-compose.yml                  # Configuração da infraestrutura do Airflow via Docker
 ├── requirements.txt                    # Lista de dependências Python
 └── README.md                           # Documentação do projeto
-
+ </pre>
 
 ---
 
@@ -84,3 +85,14 @@ http://localhost:8080
 # Login padrão:
 Usuário: airflow
 Senha: airflow
+```
+---
+## Propostas
+### Monitoramento e alertas
+- Uso de alertas via Slack, Microsoft Teams ou email via Airflow (on_failure_callback)
+- Uso de bibliotecas como a great_expectations para validações
+
+### Utilização em Cloud
+- As arquiterua das pastas poderia facilmente ser replicada em qualquer serviço de armazenamento de arquivos, como Google Cloud Storage ou Amazon S3
+- Os arquivos das camadas Silver e Gold poderiam ser disponibilizados para consultas SQL no AWS Athena ou Google Big Query
+- O Airflow poderia ser gerenciado dentro de uma máquina virutal ou mesmo com o uso de ferramentas específicas como o Cloud Composer do Google
